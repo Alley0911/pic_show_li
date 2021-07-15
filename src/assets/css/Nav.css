@@ -1,0 +1,37 @@
+div.nav{
+  background-color: #2d97db;
+  height: 40px;
+  box-shadow: 0px 2px 3px #888888;
+}
+
+div.nav ul {
+  float: left;
+  padding: 0px 0px 0px 0px;
+  margin: 0 0;
+  height:40px;
+  text-align: center;
+}
+div.nav ul li{
+  /* positon，可使li展现在其他元素上面 */
+  position: relative;  
+  list-style: none;
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  line-height: 40px;
+  height: 40px;
+  list-style: none;
+  /* color:white; */
+  padding: 0px 25px;
+  font-weight: 500; 
+  /* z-index:100 */
+}
+div.nav a{
+color: black;
+text-decoration: none;
+}
+div.nav a:hover{
+cursor: pointer;
+color: white;
+text-decoration: none;
+}
