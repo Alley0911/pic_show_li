@@ -2,21 +2,18 @@
   <div>
     <Head/>
     <Nav 
-      :dataIndex='dataIndex'
       :dataAll='dataAll'
-      @changeData='changeData'
      >
      </Nav>
-    <Contain 
-      :varIndex='varIndex'
-      :dataIndex='dataIndex'
+     <router-view
       :dataAll='dataAll'
-      :leadTime="leadTime"
-      :level="level"
+      level='level'
+      leadTime='leadTime'
       @changeLeadTime='changeLeadTime'
       @changeLevel='changeLevel'
-      @changeVar='changeVar'>
-    </Contain>
+      >
+
+     </router-view>
     <Footer></Footer>
   </div>  
 </template>
@@ -40,24 +37,11 @@ export default {
   data(){
     return {      
         dataAll: items,
-        dataIndex: 0,
-        varIndex: 0,
         level: '500',
         leadTime: "0"     
     }
   },
   methods:{
-    changeData(index){
-      this.dataIndex = index
-      this.varIndex = 0
-      this.leadTime = this.dataAll[index].children[this.varIndex].leadTimes[0]
-      this.level = this.dataAll[index].children[this.varIndex].levels[0]
-    },
-    changeVar(index){
-      this.varIndex = index
-      this.leadTime = this.dataAll[this.dataIndex].children[index].leadTimes[0]
-      this.level = this.dataAll[this.dataIndex].children[index].levels[0]
-    },
     changeLevel(value){
       this.level = value
     },

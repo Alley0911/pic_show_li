@@ -49,7 +49,7 @@
                 预报时效:
             </div>           
             <div class="leadTime">
-                <select name="leadTime" v-model='curLeadTime'>
+                <select name="leadTime" v-model="curLeadTime">
                     <option 
                       v-for='(item, index) in leadTimes' 
                       :key='index'
@@ -74,7 +74,7 @@
         </div>            
     <div class="pic">
         <img id="result" :src="imgAdr">
-    </div>    
+    </div> 
     </div>
 </div>
 </template>
@@ -84,54 +84,64 @@ import laydate from 'layui-laydate'
 
 export default {
   name: 'contain',
-  props:['dataAll', 'dataIndex', 'varIndex', 'leadTime', 'level'],
+  props:['dataAll','leadTime',"level"],
   data(){
     return {
       iniTimes: ['00'],
       iniTime: '00',
       date: '20210712',
-	    levels: [],
-      leadTimes: [],
       imgAdr: '#'
     }
   },
   computed:{
+    dataIndex(){
+      return this.$route.params.dataIndex
+    },
     dataLable(){
-      return this.dataAll[this.dataIndex].lable
+      return this.dataAll[this.$route.params.dataIndex].lable
     },
     dataValue(){
-      return this.dataAll[this.dataIndex].value
-    },    
-    varLable(){
-      return this.dataAll[this.dataIndex].children[this.varIndex].lable
-    },  
-    varValue(){
-      return this.dataAll[this.dataIndex].children[this.varIndex].value
+      return this.dataAll[this.$route.params.dataIndex].value
     },
-    curLevel:{
-      get() {
-        return this.level
-      },
-      set(newvalue){
-        this.$emit("changeLevel", newvalue)
-      }
+    varIndex(){
+      return this.$route.params.varIndex
+    },
+    varLable(){
+      return this.dataAll[this.$route.params.dataIndex].children[this.$route.params.varIndex].lable
+    },
+    varValue(){
+      return this.dataAll[this.$route.params.dataIndex].children[this.$route.params.varIndex].value
+    },
+    leadTimes(){
+      return this.dataAll[this.$route.params.dataIndex].children[this.$route.params.varIndex].leadTimes
+    },
+    levels(){
+      return this.dataAll[this.$route.params.dataIndex].children[this.$route.params.varIndex].levels
     },
     curLeadTime:{
-      get() {
-        return this.leadTime
+      get(){
+        return this.dataAll[this.$route.params.dataIndex].children[this.$route.params.varIndex].leadTimes[0]
       },
-      set(newvalue){
-        this.$emit("changeLeadTime", newvalue)
+      set(newValue){
+        console.log(456)
+        this.$emit("changeLeadTime", newValue)
+      }
+    },
+    curLevel:{
+      get(){
+        return this.dataAll[this.$route.params.dataIndex].children[this.$route.params.varIndex].levels[0]
+      },
+      set(newValue){
+        this.$emit("changeLevel", newValue)
       }
     }
   },
   methods:{
     selectVar(index){
-      this.$emit("changeVar", index);
+      this.$router.push({
+        path: '/show/' + this.dataIndex + '/' + index
+      })
     },
-    aaa(value){
-      alert(value)
-    }
   },
   mounted(){
     var _this = this
@@ -147,23 +157,31 @@ export default {
           _this.date = value   
         }
     });
-    this.levels = this.dataAll[this.dataIndex].children[this.varIndex].levels;
-    this.leadTimes = this.dataAll[this.dataIndex].children[this.varIndex].leadTimes;
-  },
-  updated(){
-    
-    this.levels = this.dataAll[this.dataIndex].children[this.varIndex].levels;
-    this.leadTimes = this.dataAll[this.dataIndex].children[this.varIndex].leadTimes;
     if(this.curLevel=='无'){
       var ll = ''
       var addr = "http://localhost/data/" + this.dataValue + "/" + this.date + this.iniTime + "/"+ this.varValue +
-      "/" + this.varValue + "_" + this.date + this.iniTime + "_" + this.leadTime + ".png"
+      "/" + this.varValue + "_" + this.date + this.iniTime + "_" + this.curLeadTime + ".png"
       this.imgAdr = addr
     }
     else{
       var addr = "http://localhost/data/" + this.dataValue + "/" + this.date + this.iniTime + "/"+ this.varValue +
-      "/" + this.varValue + "_" + "H" + this.curLevel + "_" + this.date + this.iniTime + "_" + this.leadTime + ".png"
+      "/" + this.varValue + "_" + "H" + this.curLevel + "_" + this.date + this.iniTime + "_" + this.curLeadTime + ".png"
       this.imgAdr = addr
+      console.log(addr);
+    } 
+  },
+  updated(){    
+    if(this.curLevel=='无'){
+      var ll = ''
+      var addr = "http://localhost/data/" + this.dataValue + "/" + this.date + this.iniTime + "/"+ this.varValue +
+      "/" + this.varValue + "_" + this.date + this.iniTime + "_" + this.curLeadTime + ".png"
+      this.imgAdr = addr
+    }
+    else{
+      var addr = "http://localhost/data/" + this.dataValue + "/" + this.date + this.iniTime + "/"+ this.varValue +
+      "/" + this.varValue + "_" + "H" + this.curLevel + "_" + this.date + this.iniTime + "_" + this.curLeadTime + ".png"
+      this.imgAdr = addr
+      console.log(addr);
     }
 
   }

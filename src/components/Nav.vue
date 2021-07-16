@@ -8,7 +8,7 @@
         @click="changeData(index)"
         :key='index'>
             <li>
-              <a href="#">{{item.lable}}</a>
+              <a href="">{{item.lable}}</a>
             </li>
         </ul>
     </div>
@@ -19,10 +19,12 @@
 // @ is an alias to /src
 export default {
   name: 'Nav',
-  props:['dataAll', 'dataIndex'],
+  props:['dataAll'],
   methods:{
     changeData(index){
-      this.$emit("changeData", index);
+      this.$router.push({
+        path: '/show/' + index + '/0/',
+      })
     }
   }
 }

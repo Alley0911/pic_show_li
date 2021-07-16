@@ -5,15 +5,20 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const routes = [
-// {
-//   path: '/',
-//   name: 'home',
-//   component: () => import('./views/Home.vue')
-// }
+  {
+    path: '/',
+    redirect: '/show/0/0'
+  }
+  ,{
+  path: '/show/:dataIndex/:varIndex',
+  name: 'show',
+  component: () => import('./components/Contain.vue')
+}
 ]
 const router = new VueRouter({
+  mode: 'history',
   routes,
-  mode: 'history'
+
 })
 
 export default router
