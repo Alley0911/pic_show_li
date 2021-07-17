@@ -26,12 +26,11 @@ div.nav ul li{
   font-weight: 500; 
   /* z-index:100 */
 }
-div.nav a{
+li.nav{
 color: black;
 text-decoration: none;
 }
-div.nav a:hover{
+.active{
 cursor: pointer;
 color: white;
-text-decoration: none;
 }

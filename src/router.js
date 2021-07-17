@@ -7,10 +7,10 @@ Vue.use(Router)
 const routes = [
   {
     path: '/',
-    redirect: '/show/0/0'
+    redirect: '/show/0/0/0/0'
   }
   ,{
-  path: '/show/:dataIndex/:varIndex',
+  path: '/show/:dataIndex/:varIndex/:leadTimeIndex/:levelIndex',
   name: 'show',
   component: () => import('./components/Contain.vue')
 }

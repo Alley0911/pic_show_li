@@ -62,7 +62,9 @@
                 层次:
             </div>           
             <div class="level">
-                <select name="level" v-model="curLevel">
+                <select name="level" 
+                  @change='changeLevel(value)'
+                  v-model="curLevel">
                     <option 
                       v-for='(item, index) in levels' 
                       :value="item"
@@ -81,6 +83,7 @@
 
 <script>
 import laydate from 'layui-laydate'
+import {updatePic, getIndexFromValue, pushRouter} from 'assets/js/func.js'
 
 export default {
   name: 'contain',
@@ -90,7 +93,7 @@ export default {
       iniTimes: ['00'],
       iniTime: '00',
       date: '20210712',
-      imgAdr: '#'
+      imgAdr: '#',
     }
   },
   computed:{
@@ -113,34 +116,39 @@ export default {
       return this.dataAll[this.$route.params.dataIndex].children[this.$route.params.varIndex].value
     },
     leadTimes(){
-      return this.dataAll[this.$route.params.dataIndex].children[this.$route.params.varIndex].leadTimes
+      return this.dataAll[this.$route.params.dataIndex].children[this.$route.params.varIndex].leadTimes;     
     },
     levels(){
-      return this.dataAll[this.$route.params.dataIndex].children[this.$route.params.varIndex].levels
+      return this.dataAll[this.$route.params.dataIndex].children[this.$route.params.varIndex].levels;     
+    },
+    leadTimeIndex(){
+      return this.$route.params.leadTimeIndex
+    },
+    levelIndex(){
+      return this.$route.params.levelIndex
     },
     curLeadTime:{
       get(){
-        return this.dataAll[this.$route.params.dataIndex].children[this.$route.params.varIndex].leadTimes[0]
+        return this.leadTimes[this.$route.params.leadTimeIndex];   
       },
       set(newValue){
-        console.log(456)
-        this.$emit("changeLeadTime", newValue)
+        var index = getIndexFromValue(this.leadTimes, newValue)
+        pushRouter(this.dataIndex, this.varIndex, index, this.levelIndex, this)
       }
     },
     curLevel:{
       get(){
-        return this.dataAll[this.$route.params.dataIndex].children[this.$route.params.varIndex].levels[0]
+        return this.levels[this.$route.params.levelIndex];   
       },
       set(newValue){
-        this.$emit("changeLevel", newValue)
+        var index = getIndexFromValue(this.levels, newValue)
+        pushRouter(this.dataIndex, this.varIndex, this.leadTimeIndex, index, this)
       }
     }
   },
   methods:{
     selectVar(index){
-      this.$router.push({
-        path: '/show/' + this.dataIndex + '/' + index
-      })
+      pushRouter(this.dataIndex, index, 0, 0, this)
     },
   },
   mounted(){
@@ -157,33 +165,11 @@ export default {
           _this.date = value   
         }
     });
-    if(this.curLevel=='无'){
-      var ll = ''
-      var addr = "http://localhost/data/" + this.dataValue + "/" + this.date + this.iniTime + "/"+ this.varValue +
-      "/" + this.varValue + "_" + this.date + this.iniTime + "_" + this.curLeadTime + ".png"
-      this.imgAdr = addr
-    }
-    else{
-      var addr = "http://localhost/data/" + this.dataValue + "/" + this.date + this.iniTime + "/"+ this.varValue +
-      "/" + this.varValue + "_" + "H" + this.curLevel + "_" + this.date + this.iniTime + "_" + this.curLeadTime + ".png"
-      this.imgAdr = addr
-      console.log(addr);
-    } 
+    updatePic(_this)
   },
   updated(){    
-    if(this.curLevel=='无'){
-      var ll = ''
-      var addr = "http://localhost/data/" + this.dataValue + "/" + this.date + this.iniTime + "/"+ this.varValue +
-      "/" + this.varValue + "_" + this.date + this.iniTime + "_" + this.curLeadTime + ".png"
-      this.imgAdr = addr
-    }
-    else{
-      var addr = "http://localhost/data/" + this.dataValue + "/" + this.date + this.iniTime + "/"+ this.varValue +
-      "/" + this.varValue + "_" + "H" + this.curLevel + "_" + this.date + this.iniTime + "_" + this.curLeadTime + ".png"
-      this.imgAdr = addr
-      console.log(addr);
-    }
-
+    var _this = this
+    updatePic(_this)
   }
 }
 </script>

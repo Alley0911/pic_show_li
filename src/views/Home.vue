@@ -3,14 +3,14 @@
     <Head/>
     <Nav 
       :dataAll='dataAll'
+      @changeData='changeData'    
      >
      </Nav>
      <router-view
       :dataAll='dataAll'
-      level='level'
-      leadTime='leadTime'
       @changeLeadTime='changeLeadTime'
       @changeLevel='changeLevel'
+      @changeVar='changeVar'
       >
 
      </router-view>
@@ -42,6 +42,14 @@ export default {
     }
   },
   methods:{
+    changeData(index){
+      this.level = this.dataAll[index].children[0].levels[0]
+      this.leadTime = this.dataAll[index].children[0].leadTimes[0]
+    },
+    changeVar(index){
+      this.level = this.dataAll[this.$route.params.dataIndex].children[index].levels[0]
+      this.leadTime = this.dataAll[this.$route.params.dataIndex].children[index].leadTimes[0]
+    },    
     changeLevel(value){
       this.level = value
     },
@@ -52,4 +60,5 @@ export default {
 }
 </script>
 <style>
+
 </style>

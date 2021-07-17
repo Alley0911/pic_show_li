@@ -3,8 +3,8 @@
     <div class="middle">
         <h1>{{title}}</h1>
         <div id='head_nav'>
-            <!-- <span><a href="/">首页</a></span> -->
-            <!-- <span><a href="http://10.28.16.192/data">数据</a></span> -->
+            <span><a href="/">首页</a></span>
+            <span><a href="http://10.28.16.192/data">数据</a></span>
         </div>
     </div>
   </div>
