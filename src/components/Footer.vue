@@ -21,7 +21,7 @@ div.bottom_line{
     margin-top:10px;
     height: 30px;
     padding-top: 5px;
-    border-top: 3px solid #2d97db;
+    border-top: 3px solid #009bf2;
     text-align: center;
     font-size: 12px;
     color: gray;

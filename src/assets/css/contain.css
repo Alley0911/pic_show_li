@@ -6,7 +6,7 @@ div.left{
   background-color: #ffffff;
 }
 div.dataHead{
-  background-color: #2d97db;
+  background-color: #009bf2;
   height: 40px;
   line-height: 40px;
   padding-left: 20px;
@@ -22,7 +22,7 @@ div.dataBody ul li{
 }
 div.dataBody ul li:hover{
   cursor: pointer;  
-  color: orange;
+  color: #009bf2;
   font-weight: 800;  
 }
 div.right{
@@ -35,7 +35,7 @@ div.right{
 }
 div.path{
   padding: 15px 20px;
-  border-bottom: 3px solid #2d97db;
+  border-bottom: 3px solid #009bf2;
 }
 
 div.selection{
@@ -55,14 +55,14 @@ div.selection div{
 div.date {
   width: 140px; 
   padding-left: 10px; 
-  border:1px solid #2d97db;
+  border:1px solid #009bf2;
   margin-right: 30px;
   font-size: 18px;
 }
 
 select{
   padding: 2px 3px;
-  border: 1px solid #2d97db;
+  border: 1px solid #009bf2;
   height: 39px;
   width: 75px;
   outline:none;
@@ -80,7 +80,7 @@ option{
 }
 li.active{
   font-weight: 800; 
-  color:orange
+  color:#009bf2
 }
 input{
   outline-style: none ;

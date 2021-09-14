@@ -26,7 +26,7 @@ export default {
 div#head_nav a{
   font-size: 18px;
   letter-spacing: 3px;
-  color: white; 
+  color: black; 
   text-decoration: none;
 }
 div#head_nav a:hover {  
@@ -50,7 +50,7 @@ div.middle h1{
     line-height: 90px;  
     margin: 0px;  
     padding: 0px;
-    color:#00529c;
+    color:black;
     font-weight: 800;
 }
 

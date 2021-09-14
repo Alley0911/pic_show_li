@@ -63,7 +63,6 @@
             </div>           
             <div class="level">
                 <select name="level" 
-                  @change='changeLevel(value)'
                   v-model="curLevel">
                     <option 
                       v-for='(item, index) in levels' 
